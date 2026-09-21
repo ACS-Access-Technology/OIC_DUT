@@ -1,0 +1,76 @@
+:root{
+  /* Surfaces — blanc, plus de parchemin */
+  --bg:#FFFFFF;
+  --surface:#FFFFFF;
+  --surface-2:#F5F6F8;
+  --surface-sunken:#EEF0F3;
+  --border:#E5E7EB;
+  --border-strong:#C9CDD3;
+  --border-hairline:#EEF0F2;
+
+  /* Texte */
+  --text:#16202B;
+  --text-secondary:#5B6672;
+  --text-muted:#8A93A0;
+  --text-on-accent:#FFFFFF;
+
+  /* Marque OIC — bleu réel du logo (échantillonné depuis assets/images/logo-oic.jpg) */
+  --navy:#0B3D6F;
+  --navy-2:#0E56A4;
+  --navy-soft:#E7F0FA;
+  --navy-ink:#BBD3EC;
+  --navy-ink-2:#8FB4DA;
+  --navy-label:#6FA0CE;
+
+  /* Accent — orange vif du logo/drapeau (pas de terracotta délavée) */
+  --accent:#F17D0C;
+  --accent-hover:#D96C08;
+  --accent-soft:#FDECD9;
+  --accent-soft-border:#F8D3AA;
+  --accent-ring:rgba(241,125,12,.32);
+
+  /* Etats — couleurs franches et vives */
+  --success:#0C8B41; --success-soft:#E3F5EA;
+  --info:#0E56A4;    --info-soft:#E7F0FA;
+  --warning:#F59E0B; --warning-soft:#FEF3D9;
+  --error:#E11D2E;   --error-soft:#FCE4E6;
+
+  /* Squircles / pastels décoratifs (icônes + valeurs KPI) — saturés */
+  --sq-blue-bg:#E7F0FA;   --sq-blue-fg:#0E56A4;
+  --sq-green-bg:#E3F5EA;  --sq-green-fg:#0C8B41;
+  --sq-amber-bg:#FEF3D9;  --sq-amber-fg:#F59E0B;
+  --sq-navy-bg:#E7F0FA;   --sq-navy-fg:#0B3D6F;
+  --sq-rose-bg:#FCE4E6;   --sq-rose-fg:#E11D2E;
+  --sq-teal-bg:#DDF3F1;   --sq-teal-fg:#0D9488;
+  --sq-violet-bg:#EEEAFC; --sq-violet-fg:#7C3AED;
+
+  --av1:#0E56A4; --av2:#F17D0C; --av3:#0C8B41; --av4:#F59E0B; --av5:#E11D2E; --av6:#7C3AED;
+
+  /* Rayons — système plat et anguleux */
+  --r-sm:3px; --r-md:4px; --r-lg:6px; --r-xl:8px; --r-pill:999px;
+  --r-control:4px;
+
+  /* Ombres — quasi inexistantes (système à bordures, pas de carte flottante) */
+  --sh-1:none;
+  --sh-2:none;
+  --sh-3:0 12px 40px rgba(22,32,43,.14);
+  --sh-focus:0 0 0 3px var(--accent-ring);
+
+  /* Pas de relief 3D dans ce design — tout est plat */
+  --ctl-grad:none;
+  --ctl-hi:none;
+
+  /* Espacements */
+  --s1:4px; --s2:8px; --s3:16px; --s4:24px; --s5:32px; --s6:48px;
+
+  /* Layout */
+  --side-w:248px;
+  --top-h:56px;
+
+  --font:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  /* Police unique dans toute l'app — aucune serif, y compris pour les titres. */
+  --font-serif:var(--font);
+
+  /* Motif de marque : liseré tricolore décoratif */
+  --flag-strip:repeating-linear-gradient(115deg,var(--accent) 0 4px,var(--success) 4px 8px);
+}

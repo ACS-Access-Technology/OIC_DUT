@@ -1,0 +1,24 @@
+globalThis.localStorage={getItem:()=>null};
+import assert from 'node:assert/strict';
+import { computeInsights, visibleDuts, searchDocuments, documentUrl, insightsCsv } from '../js/services/insights.service.js';
+const now = new Date('2026-09-21T12:00:00Z');
+const base = {partnerId:'p1',antennaId:'a1',general:{transporterId:'t1',transporterName:'Société Test',immatriculation:'AB-123'},createdAt:'2026-09-10T12:00:00Z',trajet:{chargement:{ville:'Abidjan'},dechargement:{ville:'Bouaké'}},marchandises:[{poidsTonnes:20}]};
+const docs=[{...base,id:'1',status:'VALIDE',submittedAt:'2026-09-10T12:00:00Z',validatedAt:'2026-09-11T12:00:00Z'}, {...base,id:'2',status:'TERMINE',submittedAt:'2026-09-18T12:00:00Z'}, {...base,id:'3',status:'REJETE'}, {...base,id:'4',partnerId:'p2',antennaId:'a2',general:{transporterId:'t2'},status:'VALIDE',createdAt:'2026-01-01T00:00:00Z'}];
+const s=computeInsights(docs,30,now);
+assert.equal(s.total,3);assert.equal(s.tonnes,20);assert.equal(s.validationRate,33);assert.equal(s.delayHours,24);assert.equal(s.overdue,1);assert.equal(s.priority[0].id,'3');assert.equal(s.corridors[0].name,'Abidjan → Bouaké');assert.equal(s.months.at(-1).count,3);
+assert.equal(computeInsights(docs,0,now).total,4);
+const empty=computeInsights([],30,now);assert.equal(empty.validationRate,0);assert.equal(empty.delayHours,null);assert.deepEqual(empty.corridors,[]);
+assert.equal(computeInsights([{...base,status:'TERMINE',submittedAt:'2027-01-01'}],30,now).overdue,0);
+globalThis.localStorage={getItem:key=>key==='dut_list'?JSON.stringify(docs):null};
+assert.equal(visibleDuts({role:'PARTNER_ADMIN',partnerId:'p1'}).length,3);
+assert.equal(visibleDuts({role:'ANTENNA_AGENT',antennaId:'a2'}).length,1);
+assert.equal(visibleDuts({role:'TRANSPORTEUR',transporterId:'t2'}).length,1);
+assert.equal(visibleDuts({role:'OIC_ADMIN'}).length,4);
+assert.equal(visibleDuts({role:'CONTROLLER'}).length,0);
+assert.equal(searchDocuments({role:'PARTNER_ADMIN',partnerId:'p1'},'societe').length,3);
+assert.equal(searchDocuments({role:'PARTNER_ADMIN',partnerId:'p2'},'AB-123').length,0);
+assert.equal(documentUrl({role:'ANTENNA_AGENT'},{id:'123'}),'#/antenna/dut/123');
+console.log('Assertions réussies : périodes, tonnage, délais, priorités, périmètres de rôles et recherche.');
+
+assert.ok(insightsCsv(computeInsights(docs,30,now),30).includes('"Tonnage DUT validés";"20"'));
+assert.ok(insightsCsv({...empty,corridors:[{name:'=1+1',tonnes:1,count:1}]},0).includes("'=1+1"));
