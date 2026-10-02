@@ -1,3 +1,4 @@
+import { syncAntennaDirectory } from './services/antenna-directory.service.js';
 import * as adminView from './views/admin.view.js';
 import * as planningView from './views/planning.view.js';
 import * as actionCenterView from './views/action-center.view.js';
@@ -24,6 +25,7 @@ import * as oicDashboardView from './views/oic-dashboard.view.js?v=oic-blue';
 import * as transporteurDashboardView from './views/transporteur-dashboard.view.js?v=oic-blue';
 
 if (!isSeeded()) seedDemoData();
+syncAntennaDirectory();
 
 function withShell(view, breadcrumb) {
   return (params) => {
@@ -50,6 +52,7 @@ registerRoute('/partner/dashboard', withShell(partnerDashboardView, ['Partenaire
 registerRoute('/partner/dut', withShell(dutListView, ['Partenaire', 'Mes DUT']), { permission: 'dut.view' });
 registerRoute('/partner/operations', withShell(operationsView, ['Partenaire', 'Opérations & plages']), { permission: 'operations.view' });
 registerRoute('/partner/referentials', withShell(referentialsView, ['Partenaire', 'Référentiels']), { permission: 'referentials.manage' });
+registerRoute('/oic/antennas', withShell(antennasMapView, ['OIC', 'Carte des antennes']), { permission: 'dashboard.oic' });
 registerRoute('/partner/antennas', withShell(antennasMapView, ['Partenaire', 'Carte des antennes']), { permission: 'antennas.view' });
 
 registerRoute('/dut/new/:step', withShell(dutFormView, ['Partenaire', 'Nouveau DUT']), { permission: 'dut.create' });

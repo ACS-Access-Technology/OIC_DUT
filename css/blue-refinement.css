@@ -29,3 +29,6 @@ body{font-size:15px;font-weight:500}h1,h2,h3,h4{font-weight:700}h1{font-size:29p
 .antennas-table-panel .data-table tbody tr{cursor:pointer}
 @media(max-width:1100px){.antennas-layout{grid-template-columns:minmax(0,1fr)}.antennas-map-panel .map-container{height:340px;min-height:340px;flex:auto}}
 @media(max-width:700px){.antennas-layout{gap:16px}.antennas-map-panel .map-container{height:300px;min-height:300px}}
+
+.antenna-phone-tooltip{padding:12px 16px;border-radius:10px;color:#17395d;font-family:inherit;font-size:14px;line-height:1.7;box-shadow:0 6px 22px #12365b24}.antenna-phone-tooltip span{font-weight:600;white-space:nowrap}
+.antennas-table-panel .table-wrap{max-height:520px;overflow:auto}.antennas-table-panel thead{position:sticky;top:0;z-index:1;background:var(--surface,#fff)}.antennas-map-panel .map-container{max-height:580px}

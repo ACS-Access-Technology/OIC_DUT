@@ -275,3 +275,7 @@ Compte initial : `oic.admin@demo.oic.ci` / `demo123` (sauf réinitialisation de 
 Ces contrôles et données restent ceux d’un POC dans le navigateur (localStorage), pas d’une authentification serveur de production. Les rôles eux-mêmes sont prédéfinis, leurs permissions ne sont pas éditables depuis l’interface. Les manuels précédemment exportés doivent être actualisés pour inclure ce nouvel espace.
 
 Vérification : `node --experimental-default-type=module --test tests/*.test.mjs`.
+
+### Réseau des antennes
+23 contacts repris sans conversion des numéros de `LISTE ANTENNE.pdf` fourni le 21/09/2026. Mise à jour automatique du référentiel local au chargement, sans changement des identifiants existants ni suppression des antennes personnalisées. Carte accessible dans les espaces Partenaire et OIC ; téléphone en infobulle et au clic. Les positions indiquent les localités, pas les bureaux exacts ; adresses et horaires absents du document ne sont pas inventés.
+Repères géographiques complémentaires : Pogo https://mapcarta.com/fr/16910506 ; Noé https://mapcarta.com/fr/16912292 ; Takikro (Gontougo) https://www.artci.ci/images/stories/pdf/qualite_service/qos-2019/rapport_controle_inopine_qos2019_takikro_gontougo.pdf .

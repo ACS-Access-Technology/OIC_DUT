@@ -1,3 +1,4 @@
+import { mergeAntennaDirectory } from './data/antennas.js';
 import { STORAGE_KEYS, ROLES, DUT_STATUS, AUDIT_ACTIONS, AUDIT_LABELS, DEMO_PASSWORD } from './core/constants.js';
 import { uuid, nowIso } from './core/utils.js';
 import { writeCollection, writeObject, readObject } from './core/storage.js';
@@ -232,7 +233,7 @@ export function seedDemoData() {
   }
 
   // ===== Écriture LocalStorage =====
-  writeCollection(STORAGE_KEYS.ANTENNAS, antennas);
+  writeCollection(STORAGE_KEYS.ANTENNAS, mergeAntennaDirectory(antennas));
   writeCollection(STORAGE_KEYS.PARTNERS, partners);
   writeCollection(STORAGE_KEYS.USERS, users);
   writeCollection(STORAGE_KEYS.TRANSPORTERS, transporters);

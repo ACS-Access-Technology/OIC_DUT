@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {officialAntennas,mergeAntennaDirectory} from '../js/data/antennas.js';
+assert.equal(officialAntennas.length,23);
+assert.equal(new Set(officialAntennas.map(a=>a.name)).size,23);
+assert.equal(officialAntennas.find(a=>a.name==='NOE').phone,'08 41 81 79 / 74 68 21 16');
+const old=[{id:'linked-abidjan',name:'ABIDJAN'},{id:'linked-bouake',name:'BOUAKÉ'},{id:'linked-sanpedro',name:'SAN-PÉDRO'},{id:'linked-yam',name:'YAMOUSSOUKRO'}];
+const updated=mergeAntennaDirectory(old);assert.equal(updated.length,23);assert.equal(updated.find(a=>a.name==='ABIDJAN SIEGE').id,'linked-abidjan');assert.equal(updated.find(a=>a.name==='BOUAKE').id,'linked-bouake');assert.equal(updated.find(a=>a.name==='SAN PEDRO').id,'linked-sanpedro');assert.deepEqual(mergeAntennaDirectory(updated),updated);
+assert.equal(mergeAntennaDirectory([...old,{id:'custom',name:'Personnalisée'}]).length,24);
+assert.ok(updated.every(a=>Number.isFinite(a.lat)&&Number.isFinite(a.lng)&&a.phone));
+console.log('23 antennes : contacts, identifiants existants, absence de doublons et migration répétable validés.');

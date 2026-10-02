@@ -10,7 +10,7 @@ export function render(container) {
   container.innerHTML = `
     <div class="page-header">
       <div>
-        <span class="overline">Partenaire · Réseau</span>
+        <span class="overline">Réseau OIC</span>
         <h1>Carte des antennes OIC</h1>
         <div class="subtitle">Localisez l’antenne la plus proche</div>
       </div>
@@ -18,7 +18,7 @@ export function render(container) {
     <div class="page-header-rule"></div>
     <div class="alert-banner info">
       ${icon('info', { size: 18 })}
-      <div class="alert-text"><strong>Données de démonstration</strong>Les positions affichées sont indicatives et ne constituent pas des coordonnées officielles.</div>
+      <div class="alert-text"><strong>Contacts issus de votre liste OIC</strong>Numéros reproduits tels que fournis dans le PDF. Les points indiquent les localités : les adresses exactes des bureaux restent à confirmer.</div>
     </div>
     <div class="antennas-layout">
     <section class="map-card antennas-map-panel" aria-label="Localisation des antennes">
@@ -26,7 +26,7 @@ export function render(container) {
       <div id="antennas-map" class="map-container"></div>
     </section>
     <section class="card antennas-table-panel" aria-label="Liste des antennes">
-      <div class="card-header"><div><h3>Antennes du réseau</h3><div class="subtitle">Sélectionnez une antenne pour la situer sur la carte.</div></div></div>
+      <div class="card-header"><div><h3>Antennes du réseau · ${antennas.length}</h3><div class="subtitle">Survolez un point pour voir son téléphone. Cliquez pour consulter les détails.</div></div></div>
       <div class="table-wrap"><table class="data-table">
         <thead><tr><th scope="col">Antenne</th><th scope="col">Adresse</th><th scope="col">Téléphone</th><th scope="col">Horaires</th><th></th></tr></thead>
         <tbody id="antenna-cards"></tbody>
@@ -43,7 +43,7 @@ export function render(container) {
       <td>${escapeHtml(a.hours)}</td>
       <td class="text-right">
         <a class="link-action guide-btn" target="_blank" rel="noopener"
-           href="https://www.openstreetmap.org/?mlat=${a.lat}&mlon=${a.lng}#map=15/${a.lat}/${a.lng}">Me guider</a>
+           href="https://www.openstreetmap.org/?mlat=${a.lat}&mlon=${a.lng}#map=15/${a.lat}/${a.lng}">Voir la zone</a>
       </td>
     </tr>
   `).join('');
@@ -63,7 +63,8 @@ export function render(container) {
   if (antennas.length) mapInstance.fitBounds(antennas.map(a => [a.lat, a.lng]), { padding: [24, 24], maxZoom: 7 });
 
   antennas.forEach((a) => {
-    const marker = window.L.marker([a.lat, a.lng]).addTo(mapInstance);
+    const marker = window.L.marker([a.lat, a.lng], {title:a.name,alt:`${a.name} — ${a.phone}`,keyboard:true}).addTo(mapInstance);
+    marker.bindTooltip(`<strong>${escapeHtml(a.name)}</strong><br><span>${escapeHtml(a.phone)}</span>`, {direction:'top',offset:[0,-28],className:'antenna-phone-tooltip',opacity:1});
     marker.bindPopup(`
       <div class="antenna-popup">
         <strong>${escapeHtml(a.name)}</strong>
